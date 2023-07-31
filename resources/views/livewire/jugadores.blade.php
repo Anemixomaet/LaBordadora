@@ -18,6 +18,9 @@
                 <x-jet-secondary-button wire:click="crear()" class="mt-7 mb-7" wire:loading.attr="disabled">
                     {{ __('Nuevo') }}
                 </x-jet-secondary-button>
+                <x-jet-button wire:click="cargarArchivo()" class="mt-7 mb-7" wire:loading.attr="disabled">
+                    {{ __('Cargar Informacion') }}
+                </x-jet-button>
             </div>
         </div>
     </div>
@@ -34,6 +37,9 @@
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
                 @if($modal)                
                     @include('livewire.jugador.crear')
+                @endif
+                @if($modalArchivo)                
+                    @include('livewire.jugador.archivo')
                 @endif
                 <table class="table-fixed max-w-full">
                     <thead>

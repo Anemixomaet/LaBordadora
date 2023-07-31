@@ -6,6 +6,8 @@ use Livewire\Component;
 use App\Models\Persona;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PersonasImport;
 
 class Jugadores extends Component
 {
@@ -29,8 +31,10 @@ class Jugadores extends Component
     public $genero;
     public $generos=['M'=>'Masculino','F'=>'Femenino','O'=>'Otro'];
 
+    public $archivo;
 
     public $modal = false;
+    public $modalArchivo = false;
 
     public function render()
     {
@@ -142,4 +146,31 @@ class Jugadores extends Component
          $this->limpiarCampos();
     }
     
+    public function cargarArchivo()
+    {
+        $this->abrirModalArchivo();
+    }
+
+    public function importarJugadores()
+    {
+        $this->validate([
+            'archivo' => 'required|mimes:xlsx'
+        ]);
+
+        Excel::import(new PersonasImport, $this->archivo);
+
+        $this->cerrarModalArchivo();
+
+        session()->flash('message', '¡Datos importados exitosamente!');
+    }
+
+    public function abrirModalArchivo()
+    {
+        $this->modalArchivo = true;
+    }
+
+    public function cerrarModalArchivo()
+    {
+        $this->modalArchivo = false;
+    }
 }

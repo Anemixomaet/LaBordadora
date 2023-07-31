@@ -21,7 +21,7 @@ class CreatePersonasTable extends Migration
             $table->string('telefono');
             $table->string('email');
             $table->date('fechaNacimiento');
-            $table->string('imagen');
+            $table->string('imagen')->nullable();
             $table->enum('genero',['M', 'F','O']);
             $table->timestamps();
         });
