@@ -6,13 +6,10 @@ use Livewire\Component;
 use App\Models\Persona;
 use Livewire\WithPagination;
 use Livewire\WithFileUploads;
-<<<<<<< HEAD
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
-=======
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\PersonasImport;
->>>>>>> 739672804b1937aee62203bd66a711920831fc1b
 
 class Jugadores extends Component
 {
