@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Persona;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class PersonasImport implements ToModel
+class PersonasImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,13 +16,14 @@ class PersonasImport implements ToModel
     public function model(array $row)
     {
         return new Persona([
-            'nombre' => $row[0],
-            'apellido' => $row[1],
-            'cedula' => $row[2],
-            'telefono' => $row[3],
-            'email' => $row[4],
-            'fechaNacimiento' => $row[5],
-            'genero' => $row[6],
+            'nombre' => $row['nombre'],
+            'apellido' => $row['apellido'],
+            'cedula' => $row['cedula'],
+            'telefono' => $row['telefono'],
+            'email' => $row['email'],
+            'fechaNacimiento' => $row['fechanacimiento'],
+            'genero' => $row['genero'],
+            'imagen' => $row['imagen'],
         ]);
     }
 }
