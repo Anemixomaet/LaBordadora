@@ -35,7 +35,8 @@
             @endif
 
             <!-- Page Content -->
-            <main>
+            <!-- <main style="background-color: lightblue;"> -->
+            <main style="background-image: url('{{ asset('imagen/fondo.jpg') }}'); background-size: cover; background-position: center center; height: 100vh; display: flex; align-items: center; justify-content: center;">
                 {{ $slot }}
             </main>
         </div>
