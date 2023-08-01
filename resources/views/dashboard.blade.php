@@ -1,17 +1,26 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Inicio') }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center" >
+            {{ __('DASHBOARD') }}      
         </h2>
-    </x-slot>
-
-    <div class="py-1">
-        <div class="max-w-screen-2x1 mx-auto sm:px-50 lg:px-1">
-            <div class="max-w-6xl mx-auto sm:px-4 lg:px-2">
-                <p style="text-align:center">
-                <!-- <img src="https://pymstatic.com/8535/conversions/frases-futbol-wide.jpg"> -->
-                @livewire('chart.dashboard')
+    </x-slot> 
+    <div class="flex justify-between">
+        <div class="w-1/2">
+            <div class="items-center px-3 py-4 shadow-sm rounded-md bg-white">
+                @livewire('dashboard')
             </div>
         </div>
+        {{-- <div class="w-1/2">
+            <div class="items-center px-3 py-4 shadow-sm rounded-md bg-white">
+                @livewire('dashboard')
+            </div>
+        </div> --}}
     </div>
-</x-app-layout>
+    
+   
+        @livewireScripts
+        @livewireChartsScripts
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        
+</x-app-layout>  

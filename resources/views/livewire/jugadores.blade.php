@@ -58,9 +58,10 @@
                                 <td class="border px-4 py-2">{{$jugador->telefono}}</td>
                                 <td class="border px-4 py-2">{{$jugador->email}}</td>
                                 <td class="border px-4 py-2">{{$jugador->fechaNacimiento}}</td>
-                                <td class="border px-4 py-2">{{$jugador->edad}}</td>
+                                <td class="border px-4 py-2">{{$this->calcularEdad($jugador->fechaNacimiento) }}</td>
+                                {{-- <td class="border px-4 py-2">{{$jugador->edad}}</td> --}}
                                 <!-- <td class="border px-4 py-2"><img src="{{ asset('storage/'.$jugador->imagen) }}" width="20%"/></td> -->
-                                <td class="border px-4 py-2"><img src="{{ Str::replace('/public', '', asset('storage/'.$jugador->imagen)) }}" width="20%"/></td>
+                                <td class="border px-4 py-2"><img src="{{ Str::replace('/public', '', asset('storage/'.$jugador->imagen)) }}" width="40%"/></td>
                                 <td class="border px-4 py-2">{{$jugador->genero}}</td>
                                
                                 <td class="border px-4 py-2 text-center">   
