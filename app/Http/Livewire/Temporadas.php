@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Temporada;
+use Illuminate\Database\QueryException;
 
 class Temporadas extends Component
 {
@@ -61,8 +62,12 @@ class Temporadas extends Component
 
     public function borrar($id)
     {
-        Temporada::find($id)->delete();
-        session()->flash('message', 'Temporada eliminada correctamente');
+        try{
+            Temporada::find($id)->delete();
+            session()->flash('message', 'Temporada eliminada correctamente');
+        }catch (QueryException $e) {
+            session()->flash('message', 'No se puede eliminar la temporada ya que existen jugadores inscritos.');
+        }        
     }
 
     public function guardar()

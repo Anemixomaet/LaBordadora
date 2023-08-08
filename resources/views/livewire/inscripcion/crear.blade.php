@@ -24,8 +24,8 @@
                 @if(count($temporadas) > 0)
                     <div class="mb-4">
                         <label class="inline-block w-32 font-bold">Temporada:</label>
-                        <!-- wire:change="cambioTemporada" -->
-                        <select name="id_temporada" wire:model="temporada_id" wire:change="cambioTemporada" 
+                        {{-- <!-- wire:change="cambioTemporada" wire:change="cambioTemporada"--> --}}
+                        <select name="id_temporada" wire:model="temporada_id"  
                             class="w-full leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
                             <option value="">Seleccione una Temporada </option>
                             @foreach($temporadas as $temporada)

@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\PersonasImport;
+use Illuminate\Database\QueryException;
 
 class Jugadores extends Component
 {
@@ -68,6 +69,7 @@ class Jugadores extends Component
 
     public function limpiarCampos()
     {
+        $this->resetValidation();
         $this->persona_id = null;
         $this-> nombre = '';
         $this-> apellido = '';
@@ -97,8 +99,14 @@ class Jugadores extends Component
 
     public function borrar($id)
     {
-        Persona::find($id)->delete();
-        session()->flash('message', 'Jugador eliminado correctamente');
+        try {
+            Persona::find($id)->delete();
+            session()->flash('message', 'Jugador eliminado correctamente');
+        } catch (QueryException $e) {
+            session()->flash('message', 'No se puede eliminar el jugador ya que actualmente esta inscrito en alguna categoria.');
+        }
+        // Persona::find($id)->delete();
+        // session()->flash('message', 'Jugador eliminado correctamente');
     }
 
     public function guardar()
@@ -109,11 +117,11 @@ class Jugadores extends Component
         $imagenUrl = '';
         if(is_null($this->persona_id))
         {
-            if($this->nombre == "")
-            {
-                session()->flash('message_modal', 'Por favor ingresar nombre');
-                return;
-            }
+            // if($this->nombre == "")
+            // {
+            //     session()->flash('message_modal', 'Por favor ingresar nombre');
+            //     return;
+            // }
             $imagenUrl = $this->imagen->store('public');
             Persona::create(
             [
@@ -185,13 +193,13 @@ class Jugadores extends Component
     {
     return [
         'nombre' => 'required|string',
-        'apellido' => 'nullable|string',
+        'apellido' => 'required|string',
         'cedula' => 'required|string|validateCedula',
-        'telefono' => 'nullable|string',
-        'email' => 'nullable|email',
-        'fechaNac' => 'nullable|date',
-        'imagen' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        'genero' => 'nullable|string',
+        'telefono' => 'required|string',
+        'email' => 'required|email',
+        'fechaNac' => 'required|date',
+        'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'genero' => 'required|string',
     ];
     }
 
@@ -204,7 +212,10 @@ class Jugadores extends Component
         'cedula.unique' => 'La cédula ingresada ya existe en la base de datos.',
         'cedula.validate_cedula' => 'La cédula ingresada no es válida.', 
         'email.email' => 'El formato del correo electrónico no es válido.',
-        
+        'fechaNac.required' => 'La fecha es obligatoria.',
+        'telefono.required' => 'Ingrese su número de celular.',
+        'imagen.required' => 'Favor cargue una imagen.',
+        'genero.required' => 'Favor seleccion un género.',
 
         ];
     }

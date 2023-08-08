@@ -52,7 +52,7 @@
                             @endforeach
                         </select>
                     </div>
-                    Personas: {{var_export($personas)}}
+                    {{-- Personas: {{var_export($personas)}} --}}
                 @endif              
             </div>
         </form>

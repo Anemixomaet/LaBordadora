@@ -15,7 +15,7 @@
                         </div>
                     </div>
                 @endif
-                <x-jet-secondary-button wire:click="crear()" class="mt-7 mb-7" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="crear(); limpiarCampos()" class="mt-7 mb-7" wire:loading.attr="disabled">
                     {{ __('Nuevo') }}
                 </x-jet-secondary-button>
                 <x-jet-button wire:click="cargarArchivo()" class="mt-7 mb-7" wire:loading.attr="disabled">

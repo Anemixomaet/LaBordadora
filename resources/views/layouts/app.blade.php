@@ -18,6 +18,8 @@
 
         <!-- Scripts -->
         <script src="{{ mix('js/app.js') }}" defer></script>
+        <script src="{{ asset('js/alpine.js') }}" defer></script>
+        <script src="{{ asset('js/apexcharts.min.js') }}" defer></script>
     </head>
     <body class="font-sans antialiased">
         <x-jet-banner />

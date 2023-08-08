@@ -45,7 +45,7 @@
                             <input type="checkbox" wire:model="personas_presentes" value="{{ $p['id'] }}"/> 
                         </div>
                     @endforeach
-                    Asistencias: {{var_export($personas_presentes)}}
+                    {{-- Asistencias: {{var_export($personas_presentes)}} --}}
                 @endif              
             </div>
         </form>

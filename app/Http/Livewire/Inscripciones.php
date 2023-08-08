@@ -18,6 +18,7 @@ class Inscripciones extends Component
     public $jugadores=[];
     public $categorias=[];
     public $temporadas=[];
+    public $inscripciones=[];
 
     public $inscripcion_id;
     public $persona_id;
@@ -123,9 +124,9 @@ class Inscripciones extends Component
         session()->flash('message', $this->temporada_id ? '¡Cambiaste de temporada!' : '¡Se debe buscar las categorias!');
         $categorias = Inscripcion::where('id_temporada', $this->temporada_id)->groupBy('id_categoria');
         $jugador= Persona::find(1);
-        $fecha1 = date_create($jugador->fechaNacimiento);
-        $fecha2 = date_create(now());
-        $valor = date_diff($fecha1, $fecha2)->format('%R%Y') * 1;
+        // $fecha1 = date_create($jugador->fechaNacimiento);
+        // $fecha2 = date_create(now());
+        // $valor = date_diff($fecha1, $fecha2)->format('%R%Y') * 1;
     }
     
 }

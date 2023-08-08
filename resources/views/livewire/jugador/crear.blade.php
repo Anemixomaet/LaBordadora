@@ -19,10 +19,12 @@
                 <div class="mb-4">
                     <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nombre" wire:model="nombre" required>
+                    @error('nombre') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label for="apellido" class="block text-gray-700 text-sm font-bold mb-2">Apellido:</label>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="apellido" wire:model="apellido">
+                    @error('apellido') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label for="cedula" class="block text-gray-700 text-sm font-bold mb-2">Cedula:</label>
@@ -32,22 +34,26 @@
                 <div class="mb-4">
                     <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2">Telefono:</label>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="telefono" wire:model="telefono">
+                    @error('telefono') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" wire:model="email">
+                    @error('email') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="tipo" class="block text-gray-700 text-sm font-bold mb-2">Fecha Nacimiento:</label>
+                    <label for="fechaNac" class="block text-gray-700 text-sm font-bold mb-2">Fecha Nacimiento:</label>
                     <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fechaNac" wire:model="fechaNac">
+                    @error('fechaNac') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 {{-- <div class="mb-4">
                     <label for="tipo" class="block text-gray-700 text-sm font-bold mb-2">Edad:</label>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="edad" wire:model="edad" readonly>
                 </div> --}}
                 <div class="mb-4">
-                    <label for="tipo" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
+                    <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
                     <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="imagen" wire:model="imagen">
+                    @error('imagen') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
                     @if ($imagen)
@@ -66,6 +72,7 @@
                                 <option value="{{ $llave }}">{{ $valor }}</option>
                             @endforeach
                         </select>
+                        @error('genero') <span class="text-red-500">{{ $message }}</span> @enderror 
                     </div>
                 @endif        
             </div>
