@@ -13,6 +13,7 @@ use App\Http\Livewire\Pagos;
 use App\Http\Livewire\Temporadas;
 use App\Http\Livewire\Inscripciones;
 use App\Http\Livewire\Usuarios;
+use App\Http\Livewire\ReporteJugadoresCategoria;
 use App\Models\Asistencia;
 use App\Models\Pago;
 use App\Models\Temporada;
@@ -51,6 +52,8 @@ Route::middleware([
     Route::get('/pagos',Pagos::class)->name('pagos');
     Route::get('/temporadas',Temporadas::class)->name('temporadas');
     Route::get('/inscripciones',Inscripciones::class)->name('inscripciones');
+    Route::get('/reportes_jugadores_categorias',ReporteJugadoresCategoria::class)->name('jugadores_categoria');
+    Route::get('/jugadores_categorias-pdf',ReporteJugadoresCategoria::class, 'generarPDF');
     // Route::get('/tecnicocalendario',function(){return View::make("livewire.tecnico-calendario");})->name('tecnicocalendario');
 });
 
