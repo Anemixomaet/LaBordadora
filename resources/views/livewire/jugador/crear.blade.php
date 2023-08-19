@@ -57,7 +57,7 @@
                 </div>
                 <div class="mb-4">
                     @if ($imagen)
-                        {{-- Vista previa imagen: {{ $imagen->temporaryUrl() }} --}}
+                        <!-- {{-- Vista previa imagen: {{ $imagen->temporaryUrl() }} --}} -->
                         <img src="{{ $imagen->temporaryUrl() }}" width="10%">
                     @endif
                 </div>

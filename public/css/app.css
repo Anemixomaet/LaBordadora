@@ -998,6 +998,9 @@ select {
 .col-span-6 {
   grid-column: span 6 / span 6;
 }
+.col-span-12 {
+  grid-column: span 12 / span 12;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1271,6 +1274,9 @@ select {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
+}
+.grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 .grid-cols-6 {
   grid-template-columns: repeat(6, minmax(0, 1fr));
