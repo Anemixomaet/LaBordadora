@@ -6,6 +6,7 @@ use Livewire\Component;
 use App\Models\User;
 use Spatie\Permission\Models\Role;
 use Livewire\WithPagination;
+use PDF;
 
 class Usuarios extends Component
 {
@@ -127,5 +128,16 @@ class Usuarios extends Component
          
          $this->cerrarModal();
          $this->limpiarCampos();
+    }
+
+    public function generarPDF()
+    {
+        $datos = User::whereHas("roles", function($q){ $q->where("name", "Entrenador"); })->get();  
+        $pdfContent = PDF::loadView('livewire.reporte.usuarios-pdf', compact('datos'))->output();
+        return response()->streamDownload(
+            function () use ($pdfContent){
+                echo $pdfContent;
+            }, "reporte_personas.pdf"
+        );
     }
 }

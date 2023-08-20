@@ -21,6 +21,9 @@
                 <x-jet-button wire:click="cargarArchivo()" class="mt-7 mb-7" wire:loading.attr="disabled">
                     {{ __('Cargar Informacion') }}
                 </x-jet-button>
+                <x-jet-secondary-button wire:click="generarPDF()" class="mt-7 mb-7" wire:loading.attr="disabled">
+                    {{ __('Reporte') }}
+                </x-jet-secondary-button>
             </div>
         </div>
     </div>

@@ -19,27 +19,27 @@
                     
                     @can('usuarios')
                         <x-jet-nav-link href="{{ route('usuarios') }}" :active="request()->routeIs('usuarios')">
-                            {{ __('Usuarios') }}
+                            {{ __('Usuario') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('jugadores')
                         <x-jet-nav-link href="{{ route('jugadores') }}" :active="request()->routeIs('jugadores')">
-                            {{ __('Jugadores') }}
+                            {{ __('Jugadore') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('jugadores')
                         <x-jet-nav-link href="{{ route('temporadas') }}" :active="request()->routeIs('temporadas')">
-                            {{ __('Temporadas') }}
+                            {{ __('Temporada') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('categorias')
                         <x-jet-nav-link href="{{ route('categorias') }}" :active="request()->routeIs('categorias')">
-                            {{ __('Categorias') }}
+                            {{ __('Categoria') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('inscripciones')
                         <x-jet-nav-link href="{{ route('inscripciones') }}" :active="request()->routeIs('inscripciones')">
-                            {{ __('Inscripciones') }}
+                            {{ __('Inscripcion') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('asistencia')
@@ -49,7 +49,7 @@
                     @endcan
                     @can('pagos')
                         <x-jet-nav-link href="{{ route('pagos') }}" :active="request()->routeIs('pagos')">
-                            {{ __('Pagos') }}
+                            {{ __('Pago') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('pagos')
@@ -57,7 +57,7 @@
                             <x-jet-dropdown align="left" width="48">
                                 <x-slot name="trigger">
                                     <button class="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out">
-                                        <div>Reportes</div>
+                                        <div>Reporte</div>
                                         <div class="ml-1">
                                             <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                                 <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -74,10 +74,21 @@
                                     <x-jet-dropdown-link href="{{ route('jugadores_categoria') }}" :active="request()->routeIs('jugadores_categoria')">
                                         {{ __('Jugadores por categoria') }}
                                     </x-jet-dropdown-link>
+                                    <x-jet-dropdown-link href="{{ route('jugadores_asistencia') }}" :active="request()->routeIs('jugadores_asistencia')">
+                                        {{ __('Jugadores asistencia') }}
+                                    </x-jet-dropdown-link>
+                                    <x-jet-dropdown-link href="{{ route('jugadores_pago') }}" :active="request()->routeIs('jugadores_pago')">
+                                        {{ __('Jugadores pago') }}
+                                    </x-jet-dropdown-link>
                                 </x-slot>
                             </x-jet-dropdown>
                         </div>
-                    @endcan                                            
+                    @endcan
+                    @can('pagos')
+                        <x-jet-nav-link href="{{ route('notificaciones') }}" :active="request()->routeIs('notificaciones')">
+                            {{ __('Notificacion') }}
+                        </x-jet-nav-link>
+                    @endcan                                        
                 </div>
             </div>
 

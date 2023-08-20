@@ -6,7 +6,7 @@ use Livewire\Component;
 use PDF;
 use App\Models\Inscripcion;
 use App\Models\Categoria;
-
+use App\Models\Temporada;
 
 class ReporteJugadoresCategoria extends Component
 {
@@ -45,7 +45,7 @@ class ReporteJugadoresCategoria extends Component
         return response()->streamDownload(
             function () use ($pdfContent){
                 echo $pdfContent;
-            }, "filename.pdf"
+            }, "reporte_categoria.pdf"
         );
     }
 }

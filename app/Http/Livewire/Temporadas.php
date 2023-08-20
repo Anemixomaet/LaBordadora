@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Temporada;
 use Illuminate\Database\QueryException;
+use PDF;
 
 class Temporadas extends Component
 {
@@ -96,5 +97,16 @@ class Temporadas extends Component
          
          $this->cerrarModal();
          $this->limpiarCampos();
+    }
+    
+    public function generarPDF()
+    {
+        $datos = Temporada::get();
+        $pdfContent = PDF::loadView('livewire.reporte.temporadas-pdf', compact('datos'))->output();
+        return response()->streamDownload(
+            function () use ($pdfContent){
+                echo $pdfContent;
+            }, "reporte_temporadas.pdf"
+        );
     }
 }

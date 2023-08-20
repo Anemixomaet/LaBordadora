@@ -18,6 +18,9 @@
                 <x-jet-secondary-button wire:click="crear()" class="mt-7 mb-7" wire:loading.attr="disabled">
                     {{ __('Nuevo') }}
                 </x-jet-secondary-button>
+                <x-jet-secondary-button wire:click="generarPDF()" class="mt-7 mb-7" wire:loading.attr="disabled">
+                    {{ __('Reporte') }}
+                </x-jet-secondary-button>
             </div>
         </div>
     </div>

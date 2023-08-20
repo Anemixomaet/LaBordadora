@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\PersonasImport;
 use Illuminate\Database\QueryException;
+use PDF;
 
 class Jugadores extends Component
 {
@@ -247,5 +248,16 @@ class Jugadores extends Component
     public function cerrarModalArchivo()
     {
         $this->modalArchivo = false;
+    }
+
+    public function generarPDF()
+    {
+        $datos = Persona::get();  
+        $pdfContent = PDF::loadView('livewire.reporte.personas-pdf', compact('datos'))->output();
+        return response()->streamDownload(
+            function () use ($pdfContent){
+                echo $pdfContent;
+            }, "reporte_personas.pdf"
+        );
     }
 }

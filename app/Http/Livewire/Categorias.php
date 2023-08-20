@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\Categoria;
+use PDF;
 
 class Categorias extends Component
 {
@@ -92,6 +93,17 @@ class Categorias extends Component
          
          $this->cerrarModal();
          $this->limpiarCampos();
+    }
+
+    public function generarPDF()
+    {
+        $datos = Categoria::get();  
+        $pdfContent = PDF::loadView('livewire.reporte.categorias-pdf', compact('datos'))->output();
+        return response()->streamDownload(
+            function () use ($pdfContent){
+                echo $pdfContent;
+            }, "reporte_categorias.pdf"
+        );
     }
 
 }
