@@ -8,10 +8,13 @@ use App\Models\Persona;
 use App\Models\Temporada;
 use App\Models\Categoria;
 use App\Models\Inscripcion;
+use Livewire\WithFileUploads;
+
 
 class Pagos extends Component
 { 
     public $textoBuscar;
+    use WithFileUploads;
 
     public $temporadas;
     public $categorias;
@@ -98,6 +101,7 @@ class Pagos extends Component
     public function guardar()
     {
         $asistencia = null;
+        $imagenUrl = '';
 
         if(is_null($this->pago_id))
         {            
@@ -105,13 +109,14 @@ class Pagos extends Component
             // {
                 $inscripcion = Inscripcion::where('id_temporada', $this->temporada_id)->where('id_categoria', $this->categoria_id)->where('id_persona',$this->persona_id) ->first();
                 //dd($inscripcion);
+                $imagenUrl = $this->comprobante->store('public');
                 Pago::create(
                 [
                     'id_temporada'=> $this->temporada_id,
                     'id_categoria'=> $this->categoria_id,
                     'id_inscripcion'=> $inscripcion->id,
                     'id_persona'=> $this->persona_id,
-                    'comprobante' => $this->comprobante,
+                    'comprobante' => $imagenUrl,
                     'detalle' => $this->detalle,
                     'fecha' => $this->fecha
                 ]);    
@@ -119,12 +124,13 @@ class Pagos extends Component
         }
         else
         {
+            $imagenUrl = $this->imagen->store('public');
             $pago = Pago::find($this->pago_id);
             $pago->id_temporada = $this->temporada_id;
             $pago->id_categoria = $this->categoria_id;
             // $pago->id_inscripcion = $this->person_id;
             $pago->id_persona = $this->persona_id;
-            $pago->comprobante = $this->comprobante;
+            $pago->comprobante = $imagenUrl;
             $pago->detalle = $this->detalle;
             $pago->fecha = $this->fecha;
             $pago->save();

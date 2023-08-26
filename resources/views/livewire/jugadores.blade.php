@@ -1,6 +1,6 @@
 <div>
     <x-slot name="header">
-        <h1 class="text-gray-900">Jugador</h1>
+        <h1 class="text-gray-900">Jugadores</h1>
     </x-slot>
 
     <div class="py-3">
@@ -15,13 +15,13 @@
                         </div>
                     </div>
                 @endif
-                <x-jet-secondary-button wire:click="crear(); limpiarCampos()" class="mt-7 mb-7" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="crear(); limpiarCampos()" class="mt-1 mb-1" wire:loading.attr="disabled">
                     {{ __('Nuevo') }}
                 </x-jet-secondary-button>
-                <x-jet-button wire:click="cargarArchivo()" class="mt-7 mb-7" wire:loading.attr="disabled">
+                <x-jet-button wire:click="cargarArchivo()" class="mt-1 mb-1" wire:loading.attr="disabled">
                     {{ __('Cargar Informacion') }}
                 </x-jet-button>
-                <x-jet-secondary-button wire:click="generarPDF()" class="mt-7 mb-7" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="generarPDF()" class="mt-1 mb-1" wire:loading.attr="disabled">
                     {{ __('Reporte') }}
                 </x-jet-secondary-button>
             </div>

@@ -48,7 +48,7 @@
                 <th>Categoria</th>                        
                 <th>Nombre/Apellido</th>
                 <th>Fecha</th>
-                <th>Comprobante</th>
+                {{-- <th>Comprobante</th> --}}
                 <th>Detalle</th>
             </tr>
         </thead>
@@ -59,7 +59,7 @@
                     <td>{{$jugador['categoria']}}</td>
                     <td>{{$jugador['nombre']}} {{$jugador['apellido']}}</td>
                     <td>{{$jugador['fecha']}}</td>
-                    <td>{{$jugador['comprobante']}}</td>
+                    {{-- <td>{{$jugador['comprobante']}}</td> --}}
                     <td>{{$jugador['detalle']}}</td>
                 </tr>
             @endforeach

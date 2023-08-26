@@ -24,7 +24,7 @@
                     @endcan
                     @can('jugadores')
                         <x-jet-nav-link href="{{ route('jugadores') }}" :active="request()->routeIs('jugadores')">
-                            {{ __('Jugadore') }}
+                            {{ __('Jugadores') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('jugadores')
@@ -170,9 +170,9 @@
                                 {{ __('Administrador de Cuentas') }}
                             </div>
 
-                            <x-jet-dropdown-link href="{{ route('profile.show') }}">
+                            {{-- <x-jet-dropdown-link href="{{ route('profile.show') }}">
                                 {{ __('Perfil') }}
-                            </x-jet-dropdown-link>
+                            </x-jet-dropdown-link> --}}
 
                             @if (Laravel\Jetstream\Jetstream::hasApiFeatures())
                                 <x-jet-dropdown-link href="{{ route('api-tokens.index') }}">

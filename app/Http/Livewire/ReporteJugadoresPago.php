@@ -32,8 +32,9 @@ class ReporteJugadoresPago extends Component
                             'personas.nombre', 
                             'personas.apellido', 
                             'pagos.fecha',
-                            'pagos.detalle',
-                            'pagos.comprobante')
+                            'pagos.detalle')
+                            // ,
+                            // 'pagos.comprobante')
                     ->where('inscripciones.id_categoria','=', $this->categoria)
                     ->where('inscripciones.id_temporada','=', $this->temporada)
                     ->WhereYear('pagos.fecha','=',date('Y', strtotime($this->fecha)))
@@ -54,8 +55,9 @@ class ReporteJugadoresPago extends Component
                             'personas.nombre', 
                             'personas.apellido', 
                             'pagos.fecha',
-                            'pagos.detalle',
-                            'pagos.comprobante')
+                            'pagos.detalle')
+                            // ,
+                            // 'pagos.comprobante')
                     ->where('inscripciones.id_categoria','=', $this->categoria)
                     ->where('inscripciones.id_temporada','=', $this->temporada)
                     ->WhereYear('pagos.fecha','=',date('Y', strtotime($this->fecha)))

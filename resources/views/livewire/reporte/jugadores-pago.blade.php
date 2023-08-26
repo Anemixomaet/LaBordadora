@@ -59,7 +59,7 @@
                             <th class="px-4 py-2">Categoria</th>                        
                             <th class="px-4 py-2">Nombre/Apellido</th>
                             <th class="px-4 py-2">Fecha</th>
-                            <th class="px-4 py-2">Comprobante</th>
+                            {{-- <th class="px-4 py-2">Comprobante</th> --}}
                             <th class="px-4 py-2">Detalle</th>
                         </tr>
                     </thead>
@@ -70,7 +70,7 @@
                                 <td class="border px-4 py-2">{{$jugador->categoria}}</td>
                                 <td class="border px-4 py-2">{{$jugador->nombre}} {{$jugador->apellido}}</td>
                                 <td class="border px-4 py-2">{{$jugador->fecha}}</td>
-                                <td class="border px-4 py-2">{{$jugador->comprobante}}</td>
+                                {{-- <td class="border px-4 py-2">{{$jugador->comprobante}}</td> --}}
                                 <td class="border px-4 py-2">{{$jugador->detalle}}</td>
                             </tr>
                         @endforeach

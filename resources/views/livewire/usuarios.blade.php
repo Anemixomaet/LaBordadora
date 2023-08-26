@@ -3,7 +3,7 @@
         <h1 class="text-gray-900">Usuarios</h1>
     </x-slot>
 
-    <div class="py-3">
+    <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
                 @if(session()->has('message'))
@@ -15,10 +15,10 @@
                         </div>
                     </div>
                 @endif
-                <x-jet-secondary-button wire:click="crear()" class="mt-7 mb-7" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="crear()" class="mt-3 mb-3" wire:loading.attr="disabled">
                     {{ __('Nuevo') }}
                 </x-jet-secondary-button>
-                <x-jet-secondary-button wire:click="generarPDF()" class="mt-7 mb-7" wire:loading.attr="disabled">
+                <x-jet-secondary-button wire:click="generarPDF()" class="mt-3 mb-3" wire:loading.attr="disabled">
                     {{ __('Reporte') }}
                 </x-jet-secondary-button>
             </div>

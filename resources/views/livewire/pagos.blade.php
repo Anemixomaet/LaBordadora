@@ -35,7 +35,7 @@
                 @if($modal)                
                     @include('livewire.pago.crear')
                 @endif
-                <table class="table-fixed w-full">
+                <table class="table-fixed max-w-full">
                     <thead>
                         <tr class="bg-gray-50 text-black">
                             
@@ -55,7 +55,8 @@
                                 <td class="border px-4 py-2">{{$pago->persona->nombre}} {{$pago->persona->apellido}}</td>
                                 <td class="border px-4 py-2">{{$pago->fecha}}</td>
                                 <td class="border px-4 py-2">{{$pago->detalle}}</td>
-                                <td class="border px-4 py-2">{{$pago->comprobante}}</td>
+                                {{-- <td class="border px-4 py-2">{{$pago->comprobante}}</td> --}}
+                                <td class="border px-4 py-2"><img src="{{ Str::replace('/public', '', asset('storage/'.$pago->comprobante)) }}" width="40%"/></td>
                                 <td class="border px-4 py-2">{{$pago->temporada->nombre}}</td>
                                 <td class="border px-4 py-2">{{$pago->categoria->nombre}}</td>
                                 <td class="border px-4 py-2 text-center">   

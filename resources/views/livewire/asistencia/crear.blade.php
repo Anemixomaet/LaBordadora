@@ -16,7 +16,7 @@
                             class="w-full leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
                             <option value="">Seleccione un temporada </option>
                             @foreach($temporadas as $temporada)
-                                <option value="{{ $temporada->id }}">{{ $temporada->nombre }}</option>
+                                <option value="{{ $temporada->id }}">{{ $temporada->detalle }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -28,7 +28,7 @@
                             class="w-full leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
                             <option value="">Seleccione un categoria </option>
                             @foreach($categorias as $categoria)
-                                <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
+                                <option value="{{ $categoria->id }}">{{ $categoria->detalle }}</option>
                             @endforeach
                         </select>
                     </div>

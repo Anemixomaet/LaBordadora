@@ -2,12 +2,6 @@
     <livewire:livewire-column-chart
     key="{{ $columnChartModel->reactiveKey() }}"
     :column-chart-model="$columnChartModel"
-    />
-
-    {{-- <livewire:livewire-line-chart
-    key="{{ $lineChartData->reactiveKey() }}"
-    :line-chart-model="$lineChartData"
-    /> --}}
-    
+    />    
 </div>
 

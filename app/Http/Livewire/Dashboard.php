@@ -29,28 +29,9 @@ class Dashboard extends Component
         
         //dd($columnChartModel);
 
-        $pieChartData = $this->getChartData(); 
-
         return view('livewire.dashboard', [
             'columnChartModel' => $columnChartModel,
-            'pieChartData' => $pieChartData, 
         ]);
 
-    }
-
-    public function getChartData()
-    {
-        $categorias = Categoria::all();
-        $chartData = (new PieChartModel()); 
-
-        foreach ($categorias as $categoria) {
-            $jugadoresInscritos = DB::table('inscripciones')
-                ->where('id_categoria', $categoria->id)
-                ->count();
-
-            $chartData->addSlice($categoria->nombre, $jugadoresInscritos, '#'.substr(md5(rand()), 0, 6));
-        }
-
-        return $chartData;
     }
 }
