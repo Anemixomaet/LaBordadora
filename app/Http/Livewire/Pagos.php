@@ -36,18 +36,48 @@ class Pagos extends Component
 
     public function render()
     {
+
         $this->temporadas = Temporada::all();
         $this->categorias = Categoria::all();
-        $this->fecha = now()->format('Y-m-d');        
-        return view('livewire.pagos', [
-            // 'pagos' => Pago::where("nombre", "like", "%".$this->textoBuscar."%" )->paginate(5)
-            'pagos' => Pago::paginate(5)
-        ]);
+        $this->fecha = now()->format('Y-m-d');
+        
+        // Usar paginate() para obtener resultados paginados
+        $pagos = Pago::paginate(5);
+
+        return view('livewire.pagos', ['pagos' => $pagos]);
+        // $this->temporadas = Temporada::all();
+        // $this->categorias = Categoria::all();
+        // $this->fecha = now()->format('Y-m-d');        
+        // return view('livewire.pagos', [
+        //     // 'pagos' => Pago::where("nombre", "like", "%".$this->textoBuscar."%" )->paginate(5)
+        //     'pagos' => Pago::paginate(5)
+        // ]);
+        
+        // $this->temporadas = Temporada::all();
+        // $this->categorias = Categoria::all();
+        // $this->fecha = now()->format('Y-m-d');
+    
+        // $query = Pago::query();
+    
+        // if ($this->textoBuscar) {
+        //     $query->where('nombre', 'like', '%' . $this->textoBuscar . '%');
+        // }
+    
+        // $pagos = $query->paginate(5);
+    
+        // return view('livewire.pagos', [
+        //     'pagos' => $pagos,
+        // ]);
     }
 
     public function updatingTextoBuscar()
     {
         $this->resetPage();
+    }
+    
+    public function resetPage()
+    {
+        $this->reset('page');
     }
       
     public function crear()

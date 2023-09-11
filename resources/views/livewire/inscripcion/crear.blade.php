@@ -32,6 +32,9 @@
                                 <option value="{{ $temporada->id }}">{{ $temporada->detalle }} </option>
                             @endforeach
                         </select>
+                        @error('temporada_id')
+                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                        @enderror
                     </div>
                 @endif
 
@@ -42,9 +45,12 @@
                             class="w-full leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
                             <option value="">Seleccione una Categoria </option>
                             @foreach($categorias as $categoria)
-                                <option value="{{ $categoria->id }}">{{ $categoria->nombre}} </option>
+                                <option value="{{ $categoria->id }}">{{ $categoria->detalle}} </option>
                             @endforeach
                         </select>
+                        @error('categoria_id')
+                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                        @enderror
                     </div>
                 @endif
 
@@ -55,9 +61,12 @@
                             class="w-full leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
                             <option value="">Seleccione un jugador </option>
                             @foreach($jugadores as $jugador)
-                                <option value="{{ $jugador->id }}">{{ $jugador->nombre }} {{ $jugador->apellido }}</option>
+                                <option value="{{ $jugador->id }}">{{ $jugador->nombre }} {{ $jugador->apellido }} (Año: {{ $this->getAnoNacimiento($jugador->id)}})</option>
                             @endforeach
                         </select>
+                        @error('persona_id')
+                            <p class="text-red-500 text-xs italic">{{ $message }}</p>
+                        @enderror
                     </div>
                 @endif
                 <div class="mb-4">

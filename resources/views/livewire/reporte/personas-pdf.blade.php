@@ -35,7 +35,7 @@
         }
     </style>
 </head>
-<body>
+<body class="landscape">
     <div class="title-container">
         <div class="left-title ">LA BORDADORA</div>
         <div class="right-title">REPORTE</div>

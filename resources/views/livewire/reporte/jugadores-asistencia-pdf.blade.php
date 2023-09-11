@@ -40,15 +40,15 @@
         <div class="left-title ">LA BORDADORA</div>
         <div class="right-title">REPORTE</div>
     </div>
-    <h4>Jugadores por categoria</h4>
+    <h4>Asistencia de Jugadores</h4>
     <table id="emp">
         <thead>
             <tr>
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Categoria</th>
-                <th>Cedula</th>
-                <th>Email</th>
+                <th>Temporada</th>
+                <th>Categoría</th>
+                <th>Asistencia</th>
+                <th>Nombres</th>
+                <th>Fecha</th>
             </tr>
         </thead>
         <tbody>

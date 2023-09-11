@@ -7,6 +7,8 @@ use PDF;
 use App\Models\Inscripcion;
 use App\Models\Categoria;
 use App\Models\Temporada;
+use App\Exports\JugadoresCategoriaExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ReporteJugadoresCategoria extends Component
 {
@@ -47,5 +49,11 @@ class ReporteJugadoresCategoria extends Component
                 echo $pdfContent;
             }, "reporte_categoria.pdf"
         );
+    }
+    public function generarExcel()
+    {
+        $export = new JugadoresCategoriaExport($this->nombre, $this->cedula, $this->categoria);
+
+        return Excel::download($export, 'reporte_categoria.xlsx');
     }
 }

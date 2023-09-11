@@ -54,5 +54,6 @@ class RolSeeder extends Seeder
         Permission::create(['name' => 'pagos.nuevo'])->syncRoles([$role1, $role2]);
         Permission::create(['name' => 'pagos.editar'])->syncRoles([$role1]);
         Permission::create(['name' => 'pagos.eliminar'])->syncRoles([$role1]);
+
     }
 }

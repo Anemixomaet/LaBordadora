@@ -22,7 +22,10 @@
                     {{ __('Cargar Informacion') }}
                 </x-jet-button>
                 <x-jet-secondary-button wire:click="generarPDF()" class="mt-1 mb-1" wire:loading.attr="disabled">
-                    {{ __('Reporte') }}
+                    {{ __('Generar PDF') }}
+                </x-jet-secondary-button>
+                <x-jet-secondary-button wire:click="generarExcelPersonas()" class="mt-1 mb-1" wire:loading.attr="disabled">
+                    {{ __('Generar Excel') }}
                 </x-jet-secondary-button>
             </div>
         </div>

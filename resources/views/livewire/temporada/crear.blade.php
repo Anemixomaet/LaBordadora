@@ -8,10 +8,13 @@
                 <div class="mb-4">
                     <label for="nombre" class="block text-gray-700 text-sm font-bold mb-2">Nombre:</label>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nombre" wire:model="nombre">
+                    @error('nombre') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
+                
                 <div class="mb-4">
                     <label for="detalle" class="block text-gray-700 text-sm font-bold mb-2">Detalle:</label>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="detalle" wire:model="detalle">
+                    @error('detalle') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 
             </div>
@@ -30,3 +33,4 @@
         </x-jet-button>
     </x-slot>
 </x-jet-dialog-modal>
+

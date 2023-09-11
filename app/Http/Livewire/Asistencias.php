@@ -21,6 +21,7 @@ class Asistencias extends Component
     //datos de asistencia
     public $asistencia_id;
     public $fecha;
+    public $asistencia;
 
     //Datos de persona
     public $person_id;

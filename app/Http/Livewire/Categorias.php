@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\Categoria;
 use PDF;
+use Illuminate\Database\QueryException;
 
 class Categorias extends Component
 {
@@ -63,36 +64,37 @@ class Categorias extends Component
 
     public function borrar($id)
     {
-        Categoria::find($id)->delete();
-        session()->flash('message', 'Categoria eliminada correctamente');
+        
+        Try{
+            Categoria::find($id)->delete();
+            session()->flash('message', 'Categoria eliminada correctamente');
+        } catch (QueryException $e) {
+            session()->flash('message', 'No se puede eliminar la categoría ya que esta en uso actualmente.');
+        }
     }
 
     public function guardar()
     {
+        $this->validate();
+
         $categoria = null;
 
-        if(is_null($this->categoria_id))
-        {
-            Categoria::create(
-            [
+        if (is_null($this->categoria_id)) {
+            Categoria::create([
                 'nombre' => $this->nombre,
                 'detalle' => $this->detalle,
-                
-            ]);    
-        }
-        else
-        {
+            ]);
+        } else {
             $categoria = Categoria::find($this->categoria_id);
             $categoria->nombre = $this->nombre;
             $categoria->detalle = $this->detalle;
             $categoria->save();
         }
-        
-         session()->flash('message',
-            $this->categoria_id ? '¡Actualización exitosa!' : '¡Se creo un nuevo registro!');
-         
-         $this->cerrarModal();
-         $this->limpiarCampos();
+
+        session()->flash('message', $this->categoria_id ? '¡Actualización exitosa!' : '¡Se creó un nuevo registro!');
+
+        $this->cerrarModal();
+        $this->limpiarCampos();
     }
 
     public function generarPDF()
@@ -106,4 +108,13 @@ class Categorias extends Component
         );
     }
 
+    protected $rules = [
+        'nombre' => 'required',
+        'detalle' => 'required',
+    ];
+    
+    protected $messages = [
+        'nombre.required' => 'El campo nombre es obligatorio.',
+        'detalle.required' => 'El campo detalle es obligatorio.',
+    ];
 }

@@ -8,6 +8,8 @@ use App\Models\Persona;
 use App\Models\Temporada;
 use App\Models\Categoria;
 use Livewire\WithPagination;
+use DateTime;
+use Livewire\Rules\Required;
 
 class Inscripciones extends Component
 {
@@ -25,6 +27,7 @@ class Inscripciones extends Component
     public $categoria_id;
     public $temporada_id;
     public $observacion;
+    public $anoNacimiento;
 
     public $modal = false;
 
@@ -42,6 +45,7 @@ class Inscripciones extends Component
             'inscripciones' => Inscripcion::paginate(5)
         ]);
     }
+
 
     public function crear()
     {
@@ -86,6 +90,7 @@ class Inscripciones extends Component
     public function guardar()
     {
         $inscripcion = null;
+        $this->validate();
         if($this->temporada_id == '' || $this->categoria_id == '' || $this->persona_id == '')
         {
             session()->flash('message_modal', 'Falta de seleccionar: Temporada o Categoria o Jugador');
@@ -127,6 +132,37 @@ class Inscripciones extends Component
         // $fecha1 = date_create($jugador->fechaNacimiento);
         // $fecha2 = date_create(now());
         // $valor = date_diff($fecha1, $fecha2)->format('%R%Y') * 1;
+    }
+
+    public function getAnoNacimiento($jugadorId)
+    {
+        $jugador = Persona::find($jugadorId);
+        
+        if ($jugador) {
+            $fechaNacimiento = new DateTime($jugador->fechaNacimiento);
+            return $fechaNacimiento->format('Y');
+        }
+
+        return null;
+    }
+
+    public function rules()
+    {
+        return [
+            'temporada_id' => ['required'],
+            'categoria_id' => ['required'],
+            'persona_id' => ['required'],
+            'observacion' => ['nullable'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'temporada_id.required' => 'El campo Temporada es obligatorio.',
+            'categoria_id.required' => 'El campo Categoría es obligatorio.',
+            'persona_id.required' => 'El campo Jugador es obligatorio.',
+        ];
     }
     
 }

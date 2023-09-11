@@ -19,6 +19,7 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
     use HasRoles;
+    use Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -29,6 +30,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'cedula',
+        'telefono',
+        'fechaNacimiento',
+        'genero',
+        
     ];
 
     /**

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Exports\PersonasExport;
 use Livewire\Component;
 use App\Models\Persona;
 use Livewire\WithPagination;
@@ -199,7 +200,7 @@ class Jugadores extends Component
         'telefono' => 'required|string',
         'email' => 'required|email',
         'fechaNac' => 'required|date',
-        'imagen' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        'imagen' => 'max:2048',
         'genero' => 'required|string',
     ];
     }
@@ -209,7 +210,7 @@ class Jugadores extends Component
     return [
         'nombre.required' => 'El campo Nombre es obligatorio.',
         'apellido.required' => 'El campo Apellido es obligatorio.',
-        'cedula.required' => 'El campo Cedula es obligatorio.',
+        'cedula.required' => 'El campo Cédula es obligatorio.',
         'cedula.unique' => 'La cédula ingresada ya existe en la base de datos.',
         'cedula.validate_cedula' => 'La cédula ingresada no es válida.', 
         'email.email' => 'El formato del correo electrónico no es válido.',
@@ -253,11 +254,17 @@ class Jugadores extends Component
     public function generarPDF()
     {
         $datos = Persona::get();  
-        $pdfContent = PDF::loadView('livewire.reporte.personas-pdf', compact('datos'))->output();
+        $pdfContent = PDF::loadView('livewire.reporte.personas-pdf', compact('datos'))->setPaper('a4', 'landscape')->output();
         return response()->streamDownload(
             function () use ($pdfContent){
                 echo $pdfContent;
             }, "reporte_personas.pdf"
         );
+    }
+        public function generarExcelPersonas()
+    {
+        $export = new PersonasExport();
+
+        return Excel::download($export, 'reporte_personas.xlsx');
     }
 }

@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Livewire;
-
+use App\Exports\JugadoresPagoExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Livewire\Component;
 use App\Models\Categoria;
 use App\Models\Temporada;
@@ -27,7 +28,7 @@ class ReporteJugadoresPago extends Component
                     ->leftJoin('personas', 'personas.id', '=', 'inscripciones.id_persona')
                     ->leftJoin('temporadas', 'inscripciones.id_temporada', '=', 'temporadas.id')
                     ->leftJoin('categorias', 'inscripciones.id_categoria', '=', 'categorias.id')
-                    ->select('temporadas.nombre as temporada', 
+                    ->select('temporadas.detalle as temporada', 
                             'categorias.nombre as categoria',
                             'personas.nombre', 
                             'personas.apellido', 
@@ -50,7 +51,7 @@ class ReporteJugadoresPago extends Component
                     ->leftJoin('personas', 'personas.id', '=', 'inscripciones.id_persona')
                     ->leftJoin('temporadas', 'inscripciones.id_temporada', '=', 'temporadas.id')
                     ->leftJoin('categorias', 'inscripciones.id_categoria', '=', 'categorias.id')
-                    ->select('temporadas.nombre as temporada', 
+                    ->select('temporadas.detalle as temporada', 
                             'categorias.nombre as categoria',
                             'personas.nombre', 
                             'personas.apellido', 
@@ -72,5 +73,11 @@ class ReporteJugadoresPago extends Component
                 echo $pdfContent;
             }, "reporte_pago.pdf"
         );
+    }
+    public function generarExcel()
+    {
+        $export = new JugadoresPagoExport($this->categoria, $this->temporada, $this->fecha);
+
+        return Excel::download($export, 'reporte_pago.xlsx');
     }
 }

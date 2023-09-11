@@ -21,14 +21,14 @@
             </div>
         </div>
     </div>
-    <div class="py-3">
+    {{-- <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
                 <label for="textoBuscar" class="block text-gray-700 text-sm font-bold mb-2">Buscar:</label>
                 <input type="text" placeholder="Ingreso un texto a buscar" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="textoBuscar" wire:model="textoBuscar">
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -56,8 +56,8 @@
                                 <td class="border px-4 py-2">{{$pago->fecha}}</td>
                                 <td class="border px-4 py-2">{{$pago->detalle}}</td>
                                 {{-- <td class="border px-4 py-2">{{$pago->comprobante}}</td> --}}
-                                <td class="border px-4 py-2"><img src="{{ Str::replace('/public', '', asset('storage/'.$pago->comprobante)) }}" width="40%"/></td>
-                                <td class="border px-4 py-2">{{$pago->temporada->nombre}}</td>
+                                <td class="border px-4 py-2"><img src="{{ Str::replace('/public', '', asset('storage/'.$pago->comprobante)) }}" width="30%"/></td>
+                                <td class="border px-4 py-2">{{$pago->temporada->detalle}}</td>
                                 <td class="border px-4 py-2">{{$pago->categoria->nombre}}</td>
                                 <td class="border px-4 py-2 text-center">   
                                     <x-jet-button wire:click="editar({{$pago->id}})" class="font-bold">

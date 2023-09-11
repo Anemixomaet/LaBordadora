@@ -43,7 +43,10 @@
                     </div>
                 </div>
                 <x-jet-secondary-button wire:click="generarPDF()" class="mt-7 ml-3">
-                    {{ __('Reporte') }}
+                    {{ __('REPORTE PDF') }}
+                </x-jet-secondary-button>
+                <x-jet-secondary-button wire:click="generarExcel()" class="mt-7 ml-3">
+                    {{ __('REPORTE EXCEL') }}
                 </x-jet-secondary-button>
             </div>
         </div>

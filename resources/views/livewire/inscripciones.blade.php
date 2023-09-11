@@ -21,14 +21,14 @@
             </div>
         </div>
     </div>
-    <div class="py-3">
+    {{-- <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
                 <label for="textoBuscar" class="block text-gray-700 text-sm font-bold mb-2">Buscar:</label>
                 <input type="text" placeholder="Ingreso un texto a buscar" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="textoBuscar" wire:model="textoBuscar">
             </div>
         </div>
-    </div>
+    </div> --}}
     <div class="py-3">
         <div class="max-w-7xl mx-auto sm:px6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg px-4 py-4">
@@ -66,7 +66,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                
+                {{-- {{ $inscripciones->links() }} --}}
             </div>
         </div>
     </div>

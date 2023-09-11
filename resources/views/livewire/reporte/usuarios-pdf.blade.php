@@ -35,7 +35,7 @@
         }
     </style>
 </head>
-<body>
+<body class="landscape">
     <div class="title-container">
         <div class="left-title ">LA BORDADORA</div>
         <div class="right-title">REPORTE</div>
@@ -45,8 +45,12 @@
         <thead>
             <tr>
                 <th>Nombre/Apellido</th>
-                <th>Email</th>
-                <th>Tipo</th>            
+                <th>Correo Electrónico</th>
+                <th>Cédula</th>
+                <th>Teléfono</th>
+                <th>Fecha Nacimiento</th>
+                <th>Género</th>
+                <th>Rol</th>            
             </tr>
         </thead>
         <tbody>
@@ -54,7 +58,15 @@
                 <tr>                                
                     <td>{{$dato['name']}}</td>
                     <td>{{$dato['email']}}</td>
-                    <td>Entrenador</td>                    
+                    <td>{{$dato['fechaNacimiento']}}</td>
+                    <td>{{$dato['cedula']}}</td>
+                    <td>{{$dato['telefono']}}</td>
+                    <td>{{$dato['genero']}}</td>
+                    <td>
+                        @foreach($dato->roles as $rol)
+                            {{$rol->name}}
+                        @endforeach
+                    </td>                      
                 </tr>
             @endforeach
         </tbody>

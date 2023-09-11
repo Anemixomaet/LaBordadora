@@ -15,14 +15,14 @@
                             </div>
                         </div>
                         <div class="sm:col-span-2">
-                            <label for="postal-code" class="px-3 block text-sm font-medium leading-6 text-gray-900">Categoria</label>
+                            <label for="postal-code" class="px-3 block text-sm font-medium leading-6 text-gray-900">Temporada</label>
                             <div class="px-3">
                                 <!-- <input type="text" name="postal-code" id="postal-code" autocomplete="postal-code" class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"> -->
                                 <select name="temporada" wire:model="temporada" 
                                     class="w-full leading-tight bg-white border border-gray-400 rounded shadow appearance-none hover:border-gray-500 focus:outline-none focus:shadow-outline">
                                     <option value="">Seleccione una temporada</option>
                                     @foreach($temporadas as $temporad)
-                                        <option value="{{ $temporad->id }}">{{ $temporad->nombre }}</option>
+                                        <option value="{{ $temporad->id }}">{{ $temporad->detalle }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -43,7 +43,10 @@
                     </div>
                 </div>
                 <x-jet-secondary-button wire:click="generarPDF()" class="mt-7 ml-3">
-                    {{ __('Reporte') }}
+                    {{ __('REPORTE PDF') }}
+                </x-jet-secondary-button>
+                <x-jet-secondary-button wire:click="generarExcel()" class="mt-7 ml-3">
+                    {{ __('REPORTE EXCEL') }}
                 </x-jet-secondary-button>
             </div>
         </div>

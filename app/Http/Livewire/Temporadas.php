@@ -73,6 +73,7 @@ class Temporadas extends Component
 
     public function guardar()
     {
+        $this->validate();
         $temporada = null;
 
         if(is_null($this->temporada_id))
@@ -109,4 +110,15 @@ class Temporadas extends Component
             }, "reporte_temporadas.pdf"
         );
     }
+
+    protected $rules = [
+        'nombre' => 'required',
+        'detalle' => 'required',
+    ];
+
+    protected $messages = [
+        'nombre.required' => 'El campo Nombre es obligatorio.',
+        'detalle.required' => 'El campo Detalle es obligatorio.',
+    ];
+
 }
