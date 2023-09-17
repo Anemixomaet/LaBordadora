@@ -28,6 +28,9 @@ class Notificaciones extends Component
     {   
         return view('livewire.notificaciones', [
             'notificaciones' => Inscripcion::join('personas', 'personas.id', '=', 'inscripciones.id_persona')
+                                ->join('temporadas', 'temporadas.id', '=', 'inscripciones.id_temporada')
+                                ->join('categorias', 'categorias.id', '=', 'inscripciones.id_categoria')
+                                ->select('inscripciones.id as id', 'temporadas.detalle as detalle', 'inscripciones.observacion as observacion', 'categorias.nombre as nombre', 'personas.nombre as nombres', 'personas.apellido as apellidos')
                                 ->where("personas.nombre", "like", "%".$this->textoBuscar."%" )->paginate(5)
         ]);
     }
@@ -47,30 +50,33 @@ class Notificaciones extends Component
     // }
 
     public function inasistencia($id)
-{
-    $inscripcion = Inscripcion::find($id);
+    {
+        $inscripcion = Inscripcion::find($id);
 
-    // Verifica si se encontró una inscripción válida
-    if ($inscripcion) {
-        $persona = Persona::find($inscripcion->id_persona);
+        // Verifica si se encontró una inscripción válida
+        if ($inscripcion) {
+            $persona = Persona::find($inscripcion->id_persona);
 
-        // Verifica si se encontró una persona válida
-        if ($persona) {
-            Mail::to($persona->email)
-                ->send(new InasistenciaCorreo($persona));
-            session()->flash('message', 'Correo de inasistencia enviado correctamente');
+            // Verifica si se encontró una persona válida
+            if ($persona) {
+                Mail::to($persona->email)
+                    ->send(new InasistenciaCorreo($persona));
+                session()->flash('message', 'Correo de inasistencia enviado correctamente');
+            } else {
+                // Maneja el caso en el que no se encontró una persona válida
+                session()->flash('error', 'No se encontró la persona asociada a esta inscripción');
+            }
         } else {
-            // Maneja el caso en el que no se encontró una persona válida
-            session()->flash('error', 'No se encontró la persona asociada a esta inscripción');
+            // Maneja el caso en el que no se encontró una inscripción válida
+            session()->flash('error', 'No se encontró la inscripción correspondiente');
         }
-    } else {
-        // Maneja el caso en el que no se encontró una inscripción válida
-        session()->flash('error', 'No se encontró la inscripción correspondiente');
     }
-}
 
     public function pago($id)
     {
+        $datos = Inscripcion::join('personas', 'personas.id', '=', 'inscripciones.id_persona')
+                                ->where("personas.nombre", "like", "%".$this->textoBuscar."%" )->get();
+        dd($datos[4]);
         $inscripcion = Inscripcion::find($id);
         $this->persona = Persona::find($inscripcion->id_persona);
         Mail::to($this->persona ->email)
