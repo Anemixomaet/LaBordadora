@@ -24,15 +24,6 @@ class ReporteJugadoresAsistencia extends Component
     {
         $this->categorias = Categoria::all();
         $this->temporadas = Temporada::all();
-        // $jugadores = Asistencia::rightjoin('inscripciones', 'inscripciones.id', '=', 'asistencias.id_inscripcion')                    
-        //             ->leftJoin('personas', 'personas.id', '=', 'inscripciones.id_persona')
-        //             ->leftJoin('temporadas', 'inscripciones.id_temporada', '=', 'temporadas.id')
-        //             ->leftJoin('categorias', 'inscripciones.id_categoria', '=', 'categorias.id')
-        //             ->select('temporadas.nombre as temporada', 'categorias.nombre as categoria', 'asistencias.asistencia', 'personas.nombre', 'personas.apellido', 'asistencias.fecha')
-        //             ->where('inscripciones.id_categoria','=', $this->categoria)
-        //             ->where('inscripciones.id_temporada','=', $this->temporada)
-        //             ->Where('asistencias.fecha','=',date('Y-m-d', strtotime($this->fecha)))
-        //             ->get();
         $jugadores = Asistencia::rightjoin('inscripciones', 'inscripciones.id', '=', 'asistencias.id_inscripcion')
             ->leftJoin('personas', 'personas.id', '=', 'inscripciones.id_persona')
             ->leftJoin('temporadas', 'inscripciones.id_temporada', '=', 'temporadas.id')

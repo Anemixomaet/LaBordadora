@@ -35,6 +35,33 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+
+//     Route::get('/usuarios',Usuarios::class)->name('usuarios');
+//     Route::get('/jugadores',Jugadores::class)->name('jugadores');
+//     Route::get('/categorias',Categorias::class)->name('categorias');
+//     Route::get('/asistencias',Asistencias::class)->name('asistencias');
+//     Route::get('/pagos',Pagos::class)->name('pagos');
+//     Route::get('/temporadas',Temporadas::class)->name('temporadas');
+//     Route::get('/inscripciones',Inscripciones::class)->name('inscripciones');
+//     Route::get('/reportes_jugadores_categorias',ReporteJugadoresCategoria::class)->name('jugadores_categoria');
+//     Route::get('/reportes_jugadores_asistencia',ReporteJugadoresAsistencia::class)->name('jugadores_asistencia');
+//     Route::get('/reportes_jugadores_pago',ReporteJugadoresPago::class)->name('jugadores_pago');
+//     Route::get('/notificaciones',Notificaciones::class)->name('notificaciones');
+//     Route::get('/jugadores_categorias-pdf',ReporteJugadoresCategoria::class, 'generarPDF');
+// });
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -48,27 +75,16 @@ Route::middleware([
         return view('dashboard');
     })->name('dashboard');
 
-    Route::get('/usuarios',Usuarios::class)->name('usuarios');
-    Route::get('/jugadores',Jugadores::class)->name('jugadores');
-    Route::get('/categorias',Categorias::class)->name('categorias');
-    Route::get('/asistencias',Asistencias::class)->name('asistencias');
-    Route::get('/pagos',Pagos::class)->name('pagos');
-    Route::get('/temporadas',Temporadas::class)->name('temporadas');
-    Route::get('/inscripciones',Inscripciones::class)->name('inscripciones');
-    Route::get('/reportes_jugadores_categorias',ReporteJugadoresCategoria::class)->name('jugadores_categoria');
-    Route::get('/reportes_jugadores_asistencia',ReporteJugadoresAsistencia::class)->name('jugadores_asistencia');
-    Route::get('/reportes_jugadores_pago',ReporteJugadoresPago::class)->name('jugadores_pago');
-    Route::get('/notificaciones',Notificaciones::class)->name('notificaciones');
-    Route::get('/jugadores_categorias-pdf',ReporteJugadoresCategoria::class, 'generarPDF');
-    // Route::get('/tecnicocalendario',function(){return View::make("livewire.tecnico-calendario");})->name('tecnicocalendario');
+    Route::get('/usuarios', Usuarios::class)->name('usuarios');
+    Route::get('/jugadores', Jugadores::class)->name('jugadores');
+    Route::get('/categorias', Categorias::class)->name('categorias');
+    Route::get('/asistencias', Asistencias::class)->name('asistencias');
+    Route::get('/pagos', Pagos::class)->name('pagos');
+    Route::get('/temporadas', Temporadas::class)->name('temporadas');
+    Route::get('/inscripciones', Inscripciones::class)->name('inscripciones');
+    Route::get('/reportes_jugadores_categorias', ReporteJugadoresCategoria::class)->name('jugadores_categoria');
+    Route::get('/reportes_jugadores_asistencia', ReporteJugadoresAsistencia::class)->name('jugadores_asistencia');
+    Route::get('/reportes_jugadores_pago', ReporteJugadoresPago::class)->name('jugadores_pago');
+    Route::get('/notificaciones', Notificaciones::class)->name('notificaciones');
+    Route::get('/jugadores_categorias-pdf', [ReporteJugadoresCategoria::class, 'generarPDF'])->name('jugadores_categorias_pdf');
 });
-
-// Route::get('storage/{filename}', function ($filename) {
-//     $path = storage_path('app/public/' . $filename);
-    
-//     if (!Storage::exists($path)) {
-//         abort(404);
-//     }
-    
-//     return response()->file($path);
-// })->where('filename', '.*');

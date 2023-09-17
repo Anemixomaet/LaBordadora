@@ -111,53 +111,115 @@ class Jugadores extends Component
         // session()->flash('message', 'Jugador eliminado correctamente');
     }
 
-    public function guardar()
-    { 
+    // public function guardar()
+    // { 
 
+    //     $this->validate();
+    //     $person = null;
+    //     $imagenUrl = '';
+    //     if(is_null($this->persona_id))
+    //     {
+    //         // if($this->nombre == "")
+    //         // {
+    //         //     session()->flash('message_modal', 'Por favor ingresar nombre');
+    //         //     return;
+    //         // }
+    //         $imagenUrl = $this->imagen->store('public');
+    //         Persona::create(
+    //         [
+    //             'nombre' => $this->nombre,
+    //             'apellido' => $this->apellido,
+    //             'cedula' => $this->cedula,
+    //             'telefono'=> $this->telefono,
+    //             'email'=> $this->email,
+    //             'fechaNacimiento'=>$this->fechaNac,
+    //             'imagen'=> $imagenUrl,
+    //             'genero'=> $this->genero,
+                
+    //         ]);    
+    //     }
+    //     else
+    //     {
+    //         $imagenUrl = $this->imagen->store('public');
+    //         $person = Persona::find($this->persona_id);
+    //         $person->nombre = $this->nombre;
+    //         $person->apellido = $this->apellido;
+    //         $person->cedula = $this->cedula;
+    //         $person->email = $this->email;
+    //         $person->fechaNacimiento = $this->fechaNac;
+    //         $person->imagen = $imagenUrl;
+    //         $person->genero = $this->genero;
+    //         $person->save();
+    //     }
+        
+    //      session()->flash('message',
+    //         $this->persona_id ? '¡Actualización exitosa!' : '¡Se creo un nuevo registro!');
+         
+    //      $this->cerrarModal();
+    //      $this->limpiarCampos();
+    // }
+    public function guardar()
+    {
         $this->validate();
-        $person = null;
+    
         $imagenUrl = '';
-        if(is_null($this->persona_id))
-        {
-            // if($this->nombre == "")
-            // {
-            //     session()->flash('message_modal', 'Por favor ingresar nombre');
-            //     return;
-            // }
-            $imagenUrl = $this->imagen->store('public');
-            Persona::create(
-            [
+    
+        if (is_null($this->persona_id)) {
+            if ($this->imagen instanceof \Illuminate\Http\UploadedFile) {
+                $imagenUrl = $this->imagen->store('public');
+            }
+    
+            // Verificar si el número de teléfono ya tiene el prefijo "+593"
+            $telefono = $this->telefono;
+            if (!str_starts_with($telefono, '+593')) {
+                // Si no tiene el prefijo, agrégaselo
+                $telefono = '+593' . $telefono;
+            }
+    
+            Persona::create([
                 'nombre' => $this->nombre,
                 'apellido' => $this->apellido,
                 'cedula' => $this->cedula,
-                'telefono'=> $this->telefono,
-                'email'=> $this->email,
-                'fechaNacimiento'=>$this->fechaNac,
-                'imagen'=> $imagenUrl,
-                'genero'=> $this->genero,
-                
-            ]);    
-        }
-        else
-        {
-            $imagenUrl = $this->imagen->store('public');
+                'telefono' => $telefono, // Teléfono con el prefijo "+593"
+                'email' => $this->email,
+                'fechaNacimiento' => $this->fechaNac,
+                'imagen' => $imagenUrl,
+                'genero' => $this->genero,
+            ]);
+        } else {
+            if ($this->imagen instanceof \Illuminate\Http\UploadedFile) {
+                $imagenUrl = $this->imagen->store('public');
+            }
+    
             $person = Persona::find($this->persona_id);
             $person->nombre = $this->nombre;
             $person->apellido = $this->apellido;
             $person->cedula = $this->cedula;
             $person->email = $this->email;
             $person->fechaNacimiento = $this->fechaNac;
-            $person->imagen = $imagenUrl;
             $person->genero = $this->genero;
+    
+            // Verificar y actualizar el teléfono con el prefijo "+593"
+            $telefono = $this->telefono;
+            if (!str_starts_with($telefono, '+593')) {
+                $telefono = '+593' . $telefono;
+            }
+            $person->telefono = $telefono;
+    
+            if ($imagenUrl) {
+                $person->imagen = $imagenUrl;
+            }
+    
             $person->save();
         }
-        
-         session()->flash('message',
-            $this->persona_id ? '¡Actualización exitosa!' : '¡Se creo un nuevo registro!');
-         
-         $this->cerrarModal();
-         $this->limpiarCampos();
+    
+        session()->flash('message', $this->persona_id ? '¡Actualización exitosa!' : '¡Se creó un nuevo registro!');
+    
+        $this->cerrarModal();
+        $this->limpiarCampos();
     }
+    
+    
 
     public function calcularEdad($fechaNacimiento)
     {
@@ -215,7 +277,7 @@ class Jugadores extends Component
         'cedula.validate_cedula' => 'La cédula ingresada no es válida.', 
         'email.email' => 'El formato del correo electrónico no es válido.',
         'fechaNac.required' => 'La fecha es obligatoria.',
-        'telefono.required' => 'Ingrese su número de celular.',
+        'telefono.required' => 'Ingrese número de celular.',
         'imagen.required' => 'Favor cargue una imagen.',
         'genero.required' => 'Favor seleccion un género.',
 

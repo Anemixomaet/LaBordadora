@@ -37,8 +37,8 @@ class DatabaseSeeder extends Seeder
             'genero' => 'O'
         ])->assignRole('Entrenador');   
         // User::factory(5)->create();
-        User::factory(5)->create([
-            'cedula' => $faker->unique()->numerify('##########'), // Generar cédulas únicas para los usuarios generados por la fábrica
-        ]);    
+        // User::factory(5)->create([
+        //     'cedula' => $faker->unique()->numerify('##########'), // Generar cédulas únicas para los usuarios generados por la fábrica
+        // ]);    
     }
 }

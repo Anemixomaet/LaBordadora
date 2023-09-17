@@ -29,7 +29,7 @@
                     @endcan
                     @can('jugadores')
                         <x-jet-nav-link href="{{ route('temporadas') }}" :active="request()->routeIs('temporadas')">
-                            {{ __('Temporada') }}
+                            {{ __('Temporadas') }}
                         </x-jet-nav-link>
                     @endcan
                     @can('categorias')

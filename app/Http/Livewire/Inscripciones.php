@@ -8,6 +8,7 @@ use App\Models\Persona;
 use App\Models\Temporada;
 use App\Models\Categoria;
 use Livewire\WithPagination;
+use Illuminate\Database\QueryException;
 use DateTime;
 use Livewire\Rules\Required;
 
@@ -83,8 +84,13 @@ class Inscripciones extends Component
 
     public function borrar($id)
     {
-        Inscripcion::find($id)->delete();
-        session()->flash('message', 'Inscripcion eliminada correctamente');
+        try{
+            Inscripcion::find($id)->delete();
+            session()->flash('message', 'Inscripcion eliminada correctamente');
+        } catch (QueryException $e) {
+            session()->flash('message', 'No se puede eliminar registro valide que non se encuentre en otro registro');
+        }
+        
     }
 
     public function guardar()

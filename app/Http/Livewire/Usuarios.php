@@ -31,6 +31,7 @@ class Usuarios extends Component
     public $rol_id;
     public $nombre;
     public $email;
+    public $password;
     public $fechaNac;
     public $imagen;
     public $cedula;
@@ -108,27 +109,28 @@ class Usuarios extends Component
         $this->validate();
         $user = null;
         $imagenUrl = '';
-        if(is_null($this->persona_id))
-        {
+    
+        if (is_null($this->persona_id)) {
             $imagenUrl = $this->imagen;
             $user = User::create([
                 'name' => $this->nombre,
                 'email' => $this->email,
-                'fechaNacimiento'=>$this->fechaNac,
-                'profile_photo_path' => $imagenUrl, 
-                'password' => bcrypt('password'),
+                'fechaNacimiento' => $this->fechaNac,
+                'profile_photo_path' => $imagenUrl,
+                'password' => $this->password ? bcrypt($this->password) : '', // Verifica si se proporcionó una contraseña
                 'cedula' => $this->cedula,
-                'telefono'=> $this->telefono,
-                'genero'=> $this->genero,
-            ]);   
-        }
-        else
-        {
+                'telefono' => $this->telefono,
+                'genero' => $this->genero,
+            ]);
+        } else {
             // $imagenUrl = $this->imagen->store('public');
             $user = User::find($this->persona_id);
             $user->name = $this->nombre;
             $user->email = $this->email;
             $user->fechaNacimiento = $this->fechaNac;
+            if ($this->password) {
+                $user->password = bcrypt($this->password);
+            }
             $user->cedula = $this->cedula;
             $user->telefono = $this->telefono;
             $user->genero = $this->genero;
@@ -139,21 +141,76 @@ class Usuarios extends Component
             // Actualizar otros campos relacionados con el usuario
             $user->save();
         }
-            // Asignar roles al usuario
-            if ($this->rol_id) {
-                $rol = Role::findOrFail($this->rol_id);
-                $user->syncRoles([$rol->id]);
-            } else {
-                // Si no se seleccionó ningún rol, eliminar todos los roles del usuario
-                $user->syncRoles([]);
-            }
-        
-         session()->flash('message',
-            $this->persona_id ? '¡Actualización exitosa!' : '¡Se creo un nuevo registro!');
-         
-         $this->cerrarModal();
-         $this->limpiarCampos();
+    
+        // Asignar roles al usuario
+        if ($this->rol_id) {
+            $rol = Role::findOrFail($this->rol_id);
+            $user->syncRoles([$rol->id]);
+        } else {
+            // Si no se seleccionó ningún rol, eliminar todos los roles del usuario
+            $user->syncRoles([]);
+        }
+    
+        session()->flash('message', $this->persona_id ? '¡Actualización exitosa!' : '¡Se creó un nuevo registro!');
+        $this->cerrarModal();
+        $this->limpiarCampos();
     }
+    
+
+    // public function guardar()
+    // {
+    //     $this->validate();
+    //     $user = null;
+    //     $imagenUrl = '';
+    //     if(is_null($this->persona_id))
+    //     {
+    //         $imagenUrl = $this->imagen;
+    //         $user = User::create([
+    //             'name' => $this->nombre,
+    //             'email' => $this->email,
+    //             'fechaNacimiento'=>$this->fechaNac,
+    //             'profile_photo_path' => $imagenUrl, 
+    //             'password' => $this->password ? bcrypt($this->password) : '', // Verifica si se proporcionó una contraseña
+    //            //'password' => bcrypt('password'),
+    //             'cedula' => $this->cedula,
+    //             'telefono'=> $this->telefono,
+    //             'genero'=> $this->genero,
+    //         ]);   
+    //     }
+    //     else
+    //     {
+    //         // $imagenUrl = $this->imagen->store('public');
+    //         $user = User::find($this->persona_id);
+    //         $user->name = $this->nombre;
+    //         $user->email = $this->email;
+    //         $user->fechaNacimiento = $this->fechaNac;
+    //         if ($this->password) {
+    //             $user->password = bcrypt($this->password);
+    //         $user->cedula = $this->cedula;
+    //         $user->telefono = $this->telefono;
+    //         $user->genero = $this->genero;
+    //         // Actualizar la imagen solo si se proporcionó una nueva
+    //         if ($this->imagen instanceof TemporaryUploadedFile) {
+    //             $user->profile_photo_path = $this->imagen->store('public');
+    //         }
+    //         // Actualizar otros campos relacionados con el usuario
+    //         $user->save();
+    //     }
+    //         // Asignar roles al usuario
+    //         if ($this->rol_id) {
+    //             $rol = Role::findOrFail($this->rol_id);
+    //             $user->syncRoles([$rol->id]);
+    //         } else {
+    //             // Si no se seleccionó ningún rol, eliminar todos los roles del usuario
+    //             $user->syncRoles([]);
+    //         }
+        
+    //      session()->flash('message',
+    //         $this->persona_id ? '¡Actualización exitosa!' : '¡Se creo un nuevo registro!');
+         
+    //      $this->cerrarModal();
+    //      $this->limpiarCampos();
+    // }
 
     // public function calcularEdad($fechaNacimiento)
     // {
@@ -212,6 +269,7 @@ class Usuarios extends Component
         return [
             'nombre' => 'required|string',
             'email' => 'required|email',
+            'password' => 'nullable|string',
             'fechaNac' => 'required|date',
             'imagen' => 'max:2048',
             'cedula' => 'required|string|validateCedula',
@@ -227,6 +285,7 @@ class Usuarios extends Component
             'nombre.required' => 'El campo Nombre es obligatorio.',
             'email.required' => 'El campo Correo Electrónico es obligatorio.',
             'email.email' => 'El formato del Correo Electrónico no es válido.',
+            'password.reqired' =>'El campo contraseña es oblogatorio',
             'fechaNac.required' => 'El campo Fecha de Nacimiento es obligatorio.',
             // 'imagen.required' => 'El campo Imagen es obligatorio.',
             // 'imagen.image' => 'La Imagen debe ser un archivo de imagen válido.',

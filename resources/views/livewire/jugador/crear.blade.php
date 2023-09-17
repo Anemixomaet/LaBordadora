@@ -32,10 +32,15 @@
                     @error('cedula') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
-                    <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2">Telefono:</label>
-                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="telefono" wire:model="telefono">
-                    @error('telefono') <span class="text-red-500">{{ $message }}</span> @enderror
+                    <label for="telefono" class="block text-gray-700 text-sm font-bold mb-2">Teléfono:</label>
+                    <div class="flex items-center">
+                        <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="telefono" wire:model="telefono">
+                        <span class="text-sm text-gray-500 ml-2">Ingrese el número con el prefijo "+593" o sin el "0"</span>
+                    </div>
                 </div>
+                @error('telefono') <span class="text-red-500">{{ $message }}</span> @enderror
+                          
+               
                 <div class="mb-4">
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email:</label>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" wire:model="email">
@@ -46,9 +51,17 @@
                     <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fechaNac" wire:model="fechaNac">
                     @error('fechaNac') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
+              
                 {{-- <div class="mb-4">
-                    <label for="tipo" class="block text-gray-700 text-sm font-bold mb-2">Edad:</label>
-                    <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="edad" wire:model="edad" readonly>
+                    <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
+                    <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="imagen" wire:model="imagen">
+                    @error('imagen') <span class="text-red-500">{{ $message }}</span> @enderror
+                </div>
+                <div class="mb-4">
+                    @if ($imagen)
+                        
+                        <img src="{{ $imagen->temporaryUrl() }}" width="10%">
+                    @endif
                 </div> --}}
                 <div class="mb-4">
                     <label for="imagen" class="block text-gray-700 text-sm font-bold mb-2">Imagen:</label>
@@ -56,9 +69,8 @@
                     @error('imagen') <span class="text-red-500">{{ $message }}</span> @enderror
                 </div>
                 <div class="mb-4">
-                    @if ($imagen)
-                        <!-- {{-- Vista previa imagen: {{ $imagen->temporaryUrl() }} --}} -->
-                        <img src="{{ $imagen->temporaryUrl() }}" width="10%">
+                    @if ($imagen instanceof \Illuminate\Http\UploadedFile)
+                        <img src="{{ $imagen->temporaryUrl() }}" width="10%" alt="Imagen previa">
                     @endif
                 </div>
 

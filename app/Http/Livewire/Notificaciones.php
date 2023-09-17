@@ -37,14 +37,37 @@ class Notificaciones extends Component
         $this->resetPage();
     }
 
+    // public function inasistencia($id)
+    // {
+    //     $inscripcion = Inscripcion::find($id);
+    //     $persona = Persona::find($inscripcion->id_persona);
+    //     Mail::to($persona->email)
+    //     ->send(new InasistenciaCorreo($persona));
+    //     session()->flash('message', 'Correo de inasistencia enviado correctamente');
+    // }
+
     public function inasistencia($id)
-    {
-        $inscripcion = Inscripcion::find($id);
+{
+    $inscripcion = Inscripcion::find($id);
+
+    // Verifica si se encontró una inscripción válida
+    if ($inscripcion) {
         $persona = Persona::find($inscripcion->id_persona);
-        Mail::to($persona->email)
-        ->send(new InasistenciaCorreo($persona));
-        session()->flash('message', 'Correo de inasistencia enviado correctamente');
+
+        // Verifica si se encontró una persona válida
+        if ($persona) {
+            Mail::to($persona->email)
+                ->send(new InasistenciaCorreo($persona));
+            session()->flash('message', 'Correo de inasistencia enviado correctamente');
+        } else {
+            // Maneja el caso en el que no se encontró una persona válida
+            session()->flash('error', 'No se encontró la persona asociada a esta inscripción');
+        }
+    } else {
+        // Maneja el caso en el que no se encontró una inscripción válida
+        session()->flash('error', 'No se encontró la inscripción correspondiente');
     }
+}
 
     public function pago($id)
     {
@@ -59,6 +82,6 @@ class Notificaciones extends Component
     {
         $inscripcion = Inscripcion::find($id);
         $persona = Persona::find($inscripcion->id_persona);
-        redirect()->to('https://wa.me/'.$persona->telefono.'?text=Hola');
+        redirect()->to('https://wa.me/'.$persona->telefono.'?text=Hola queremos informarte');
     }
 }
