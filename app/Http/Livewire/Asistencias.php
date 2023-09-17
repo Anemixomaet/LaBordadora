@@ -34,8 +34,7 @@ class Asistencias extends Component
     {
         $this->temporadas = Temporada::all();
         $this->categorias = Categoria::all();
-        // $this->asistencias = Asistencia::all();               
-        $this->fecha = now()->format('Y-m-d');
+        // $this->asistencias = Asistencia::all();
         return view('livewire.asistencias', [
             // 'asistencias' => Asistencia::where("nombre", "like", "%".$this->textoBuscar."%" )->paginate(5)
             'asistencias' => Asistencia::paginate(5)
@@ -70,7 +69,8 @@ class Asistencias extends Component
         $this->temporada_id = $asistencia->id_temporada;
         $this->categoria_id = $asistencia->id_categoria; 
         $this->asistencia_id = $asistencia->id;
-        $this->fecha = $asistencia->fecha;
+        $time = strtotime($asistencia->fecha);
+        $this->fecha = date('Y-m-d',$time);
 
         $personasAsistieron = Asistencia::where('id_temporada', $this->temporada_id)->where('id_categoria', $this->categoria_id)->get();
         // dd($personasAsistieron);

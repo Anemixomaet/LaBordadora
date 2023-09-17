@@ -39,7 +39,7 @@ class Pagos extends Component
 
         $this->temporadas = Temporada::all();
         $this->categorias = Categoria::all();
-        $this->fecha = now()->format('Y-m-d');
+        //$this->fecha = now()->format('Y-m-d');
         
         // Usar paginate() para obtener resultados paginados
         $pagos = Pago::paginate(5);
