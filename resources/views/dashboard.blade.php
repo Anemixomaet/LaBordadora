@@ -22,10 +22,10 @@
               
 
     @section('scripts')
-        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js" defer></script>
-        <script src="https://cdn.jsdelivr.net/npm/apexcharts" defer></script>
-        <script src="{{ asset('js/alpine.min.js') }}" defer></script>
-        <script src="{{ asset('js/apexcharts.min.js') }}" defer></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/alpine.min.js') }}" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/apexcharts.min.js') }}" crossorigin="anonymous"></script>
         @livewireScripts
         @livewireChartsScripts
     @endsection
