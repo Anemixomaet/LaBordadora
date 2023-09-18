@@ -50,5 +50,7 @@
         @livewireChartsScripts
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="{{ asset('js/alpine.min.js') }}" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/apexcharts.min.js') }}" crossorigin="anonymous"></script>
     </body>
 </html>
