@@ -22,8 +22,10 @@
               
 
     @section('scripts')
-        <script src="http://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"></script>
-        <script src="http://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="{{ mix('js/alpine.js') }}" defer></script>
+        <script src="{{ mix('js/apexcharts.min.js') }}" defer></script>
         @livewireScripts
         @livewireChartsScripts
     @endsection
