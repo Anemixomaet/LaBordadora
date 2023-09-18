@@ -8,18 +8,30 @@
                 <div class="mb-4">
                     <label for="fecha" class="block text-gray-700 text-sm font-bold mb-2">Fecha pago:</label>
                     <input type="date" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="fecha" wire:model="fecha">
+                    @error('fecha') <!-- Mostrar errores de validación para el campo fecha -->
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
                 </div>
-                <div class="mb-4">
+                {{-- <div class="mb-4">
                     <label for="comprobante" class="block text-gray-700 text-sm font-bold mb-2">Comprobante:</label>
-                    <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="comprobante" wire:model="comprobante">
+                    <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="comprobante" wire:model="comprobante" optional>
                     
                 </div>
                 <div class="mb-4">
                     @if ($comprobante)
-                        <!-- {{-- Vista previa imagen: {{ $imagen->temporaryUrl() }} --}} -->
+                        <img src="{{ $comprobante->temporaryUrl() }}" width="10%">
+                    @endif
+                </div> --}}
+                <div class="mb-4">
+                    <label for="comprobante" class="block text-gray-700 text-sm font-bold mb-2">Comprobante:</label>
+                    <input type="file" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="comprobante" wire:model="comprobante" optional>
+                </div>
+                <div class="mb-4">
+                    @if ($comprobante instanceof \Livewire\TemporaryUploadedFile)
                         <img src="{{ $comprobante->temporaryUrl() }}" width="10%">
                     @endif
                 </div>
+                
                 <div class="mb-4">
                     <label for="fecha" class="block text-gray-700 text-sm font-bold mb-2">Detalle:</label>
                     <input type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="detalle" wire:model="detalle">
@@ -34,6 +46,9 @@
                                 <option value="{{ $temporada->id }}">{{ $temporada->detalle }}</option>
                             @endforeach
                         </select>
+                        @error('temporada_id') <!-- Mostrar errores de validación para el campo fecha -->
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
                     </div>
                 @endif
                 @if(count($categorias) > 0)
@@ -46,6 +61,9 @@
                                 <option value="{{ $categoria->id }}">{{ $categoria->nombre }}</option>
                             @endforeach
                         </select>
+                        @error('categoria_id') <!-- Mostrar errores de validación para el campo fecha -->
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
                     </div>
                 @endif
                 @if(count($personas) > 0)
@@ -58,6 +76,9 @@
                                 <option value="{{ $personaAux['id'] }}">{{ $personaAux['nombre']}} {{ $personaAux['apellido'] }}</option>
                             @endforeach
                         </select>
+                        @error('id_persona') <!-- Mostrar errores de validación para el campo fecha -->
+                        <span class="text-red-500 text-xs">{{ $message }}</span>
+                    @enderror
                     </div>
                     {{-- Personas: {{var_export($personas)}} --}}
                 @endif              

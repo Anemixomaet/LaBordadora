@@ -128,50 +128,84 @@ class Pagos extends Component
         session()->flash('message', 'Pago eliminada correctamente');
     }
 
+    // public function guardar()
+    // {
+    //     $asistencia = null;
+    //     $imagenUrl = '';
+
+    //     if(is_null($this->pago_id))
+    //     {            
+    //         // foreach($this->personas_presentes as $ppre)
+    //         // {
+    //             $inscripcion = Inscripcion::where('id_temporada', $this->temporada_id)->where('id_categoria', $this->categoria_id)->where('id_persona',$this->persona_id) ->first();
+    //             //dd($inscripcion);
+    //             $imagenUrl = $this->comprobante->store('public');
+    //             Pago::create(
+    //             [
+    //                 'id_temporada'=> $this->temporada_id,
+    //                 'id_categoria'=> $this->categoria_id,
+    //                 'id_inscripcion'=> $inscripcion->id,
+    //                 'id_persona'=> $this->persona_id,
+    //                 'comprobante' => $imagenUrl,
+    //                 'detalle' => $this->detalle,
+    //                 'fecha' => $this->fecha
+    //             ]);    
+    //         // }  
+    //     }
+    //     else
+    //     {
+    //         $imagenUrl = $this->imagen->store('public');
+    //         $pago = Pago::find($this->pago_id);
+    //         $pago->id_temporada = $this->temporada_id;
+    //         $pago->id_categoria = $this->categoria_id;
+    //         // $pago->id_inscripcion = $this->person_id;
+    //         $pago->id_persona = $this->persona_id;
+    //         $pago->comprobante = $imagenUrl;
+    //         $pago->detalle = $this->detalle;
+    //         $pago->fecha = $this->fecha;
+    //         $pago->save();
+    //     }
+        
+    //      session()->flash('message',
+    //         $this->pago_id ? '¡Actualización exitosa!' : '¡Se creo un nuevo registro!');
+         
+    //      $this->cerrarModal();
+    //      $this->limpiarCampos();
+    // }
+
     public function guardar()
     {
+        $this->validate();
         $asistencia = null;
         $imagenUrl = '';
-
-        if(is_null($this->pago_id))
-        {            
-            // foreach($this->personas_presentes as $ppre)
-            // {
-                $inscripcion = Inscripcion::where('id_temporada', $this->temporada_id)->where('id_categoria', $this->categoria_id)->where('id_persona',$this->persona_id) ->first();
-                //dd($inscripcion);
+    
+        if (is_null($this->pago_id)) {
+            $inscripcion = Inscripcion::where('id_temporada', $this->temporada_id)->where('id_categoria', $this->categoria_id)->where('id_persona', $this->persona_id)->first();
+    
+            // Verifica si se proporcionó un archivo antes de intentar almacenarlo
+            if ($this->comprobante) {
                 $imagenUrl = $this->comprobante->store('public');
-                Pago::create(
-                [
-                    'id_temporada'=> $this->temporada_id,
-                    'id_categoria'=> $this->categoria_id,
-                    'id_inscripcion'=> $inscripcion->id,
-                    'id_persona'=> $this->persona_id,
-                    'comprobante' => $imagenUrl,
-                    'detalle' => $this->detalle,
-                    'fecha' => $this->fecha
-                ]);    
-            // }  
+            }
+    
+            Pago::create([
+                'id_temporada' => $this->temporada_id,
+                'id_categoria' => $this->categoria_id,
+                'id_inscripcion' => $inscripcion->id,
+                'id_persona' => $this->persona_id,
+                'comprobante' => $imagenUrl, // Almacena la URL temporal si se proporciona un archivo
+                'detalle' => $this->detalle,
+                'fecha' => $this->fecha,
+            ]);
+        } else {
+            // Resto del código de actualización
         }
-        else
-        {
-            $imagenUrl = $this->imagen->store('public');
-            $pago = Pago::find($this->pago_id);
-            $pago->id_temporada = $this->temporada_id;
-            $pago->id_categoria = $this->categoria_id;
-            // $pago->id_inscripcion = $this->person_id;
-            $pago->id_persona = $this->persona_id;
-            $pago->comprobante = $imagenUrl;
-            $pago->detalle = $this->detalle;
-            $pago->fecha = $this->fecha;
-            $pago->save();
-        }
-        
-         session()->flash('message',
-            $this->pago_id ? '¡Actualización exitosa!' : '¡Se creo un nuevo registro!');
-         
-         $this->cerrarModal();
-         $this->limpiarCampos();
+    
+        session()->flash('message', $this->pago_id ? '¡Actualización exitosa!' : '¡Se creó un nuevo registro!');
+    
+        $this->cerrarModal();
+        $this->limpiarCampos();
     }
+    
     
     public function cambioTemporada()
     {
@@ -204,5 +238,27 @@ class Pagos extends Component
         //dd($this->personas);
         //  dd(var_dump($this->personas)); 
     }
+
+    public function rules()
+    {
+        return [
+            'temporada_id' => 'required',
+            'categoria_id' => 'required',
+            'fecha' => 'required|date',
+            'detalle' => 'required',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'temporada_id.required' => 'El campo Temporada es obligatorio.',
+            'categoria_id.required' => 'El campo Categoría es obligatorio.',
+            'fecha.required' => 'El campo Fecha es obligatorio.',
+            'fecha.date' => 'El campo Fecha debe ser una fecha válida.',
+            'detalle.required' => 'El campo Detalle es obligatorio.',
+        ];
+    }
+
 }
 
