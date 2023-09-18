@@ -2,6 +2,7 @@
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight text-center bg-blue-200 p-2">
             {{ __('DASHBOARD') }}
+            <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
         </h2>
     </x-slot>
         
@@ -23,6 +24,8 @@
     @section('scripts')
         <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@2.x.x/dist/alpine.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="{{ asset('js/alpine.min.js') }}" crossorigin="anonymous"></script>
+        <script src="{{ asset('js/apexcharts.min.js') }}" crossorigin="anonymous"></script>
         @livewireScripts
         @livewireChartsScripts
     @endsection
